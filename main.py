@@ -46,7 +46,6 @@ def take_command():
 
 def run_alexa():
     command = take_command()
-    print(command)
     if 'play' in command:
         song = command.replace('play', '')
         talk('playing ' + song)
@@ -54,7 +53,7 @@ def run_alexa():
     elif 'time' in command:
         time = datetime.datetime.now().strftime('%I:%M %p')
         talk('Current time is ' + time)
-    elif ('who is', 'what is', 'where is') in command:
+    elif any(keyword in command for keyword in ('who is', 'what is', 'where is')):
         person = command.replace('who the heck is', '')
         info = wikipedia.summary(person, 1)
         print(info)
